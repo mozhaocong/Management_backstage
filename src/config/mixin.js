@@ -31,7 +31,7 @@ export default {
       console.log(list) // 打印没有对应参数的列表
     },
     // data是源数据 Obj被赋予对象
-    ObjForSetObj (data, Obj) { 
+    ObjForSetObj (data, Obj) {
       for(let i in Obj) {
         if(data[i]) {
           Obj[i] = data[i]
@@ -62,22 +62,34 @@ export default {
         }
       })
     },
+    ObjForSetTableObj(data, Obj) {
+      if(Obj.key){
+        Obj.key.forEach(resB => {
+          for(let i in resB) {
+            console.log('data[resB[i]]', data[resB[i]], resB[i])
+            if(i !== 'type' && Obj[i]) {
+              Obj[i] = data[resB[i]]
+            }
+          }
+        })
+      }
+    },
     TableListForSetObj(tableArray,Array) {
-      let obj = {}
+      let array = []
       Array.forEach((resA, index) =>  {
+        let obj = {}
         if(resA.key){
           resA.key.forEach(resB => {
             for(let i in resB) {
-              if(i !== 'type') {
-                console.log(resB)
-                console.log(resA)
+              if(i !== 'type' && resA[i]) {
                 obj[resB[i]] = tableArray[index][i]
               }
             }
           })
         }
+        array.push(obj)
       })
-      return obj
+      return array
     },
     // getNowFormatDate(data = '') {
     //   let date = new Date(data);

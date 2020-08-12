@@ -7,6 +7,7 @@ Router.prototype.push = function push(location) {
 
 import Test from '../pages/test/router'
 import Product from '../pages/productManagement/router'
+import transactionInformation from '../pages/transactionInformation/router'
 
 
 Vue.use(Router)
@@ -26,6 +27,7 @@ export default new Router({
             children: [
                 ...Test,
                 ...Product,
+                ...transactionInformation
             ]
         },
     ]

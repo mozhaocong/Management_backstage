@@ -42,7 +42,6 @@ export default {
       if (this.tableList.length === 0) {
         return;
       }
-      // let data = JSON.parse(JSON.stringify(this.tableList))
       let data = this.tableList;
       let dataA = JSON.parse(JSON.stringify(data));
       dataA.forEach((res) => {
@@ -52,14 +51,14 @@ export default {
       let keyData = [];
       if (data[0].key) {
         data[0].key.forEach((res) => {
-          let data = {};
+          let obj = {};
           for (let i in res) {
-            if (i !== "type") {
-              data.id = i;
+            if (i !== "type" && data[0][i]) {
+              obj.id = i;
             }
           }
-          data.type = res.type;
-          keyData.push(data);
+          obj.type = res.type;
+          keyData.push(obj);
         });
       }
       for (let i in data[0]) {
