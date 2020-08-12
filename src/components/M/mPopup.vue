@@ -35,7 +35,7 @@
       init() {
         try {
           let name = `${this.FormData.formName}`
-          window.ImVue.component(name, require(`@/page/template/form/${this.FormData.formName}`).default)
+          window.ImVue.component(name, require(`@/pages/template/form/${this.FormData.formName}`).default)
           this.formItem = name
         } catch (e) {}
       },
