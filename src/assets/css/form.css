@@ -1,0 +1,29 @@
+.font_L{
+  font-size: 28px;
+  line-height: 30px;
+  font-family: SourceHanSansSC-regular;
+  margin-bottom: 15px;
+}
+.font_M{
+  font-size: 20px;
+  line-height: 22px;
+  font-family: SourceHanSansSC-regular;
+  margin-bottom: 15px;
+}
+.font_S {
+  font-size: 14px;
+  line-height: 16px;
+  font-family: SourceHanSansSC-regular;
+  margin-bottom: 15px;
+}
+.font_t{
+  text-align: center;
+}
+
+.form_f_bs_c{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
