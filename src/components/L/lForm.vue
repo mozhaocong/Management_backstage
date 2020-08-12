@@ -1,5 +1,5 @@
 <template>
-  <div class="fromBiao" id="formBtn">
+  <div>
     <el-form :inline="true" v-model="formInline" class="demo-form-inline">
       <el-form-item v-for="(item,index) in formData" :label="item.label" :key="index">
         <!--input框-->
