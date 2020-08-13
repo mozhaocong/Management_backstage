@@ -31,97 +31,58 @@
 </template>
 
 <script>
-  export default {
-    props: ["formData","formSelect"],
-    data() {
-      return {
-        formInline: {},
-      }
-    },
-    mounted() {
-      if(this.formSelect){
-        this.formInline = this.formSelect;
-      }else{
-        this.formInline = {};
-      }
-    },
-
-    methods: {
-      onSubmit() {
-        this.$emit("queryData", this.formInline);
-      },
-      reset() {
-        let that = this;
-        Object.keys(this.formInline).forEach(key => {
-          that.formInline[key] = "";
-        });
-        this.$emit("queryData", this.formInline);
-      },
-
-
-    },
-    watch: {
-      emptyFrom() {
-        this.formInline = this.emptyFrom;
-      }
+export default {
+  props: ["formData","formSelect"],
+  data() {
+    return {
+      formInline: {},
     }
+  },
+  mounted() {
+    if(this.formSelect){
+      this.formInline = this.formSelect;
+    }else{
+      this.formInline = {};
+    }
+  },
+  methods: {
+    onSubmit() {
+      alert("查询");
+      return;
+      this.$emit("queryData", this.formInline);
+    },
+    reset() {
+      alert("重置");
+      return;
+      let that = this;
+      Object.keys(this.formInline).forEach(key => {
+        that.formInline[key] = "";
+      });
+      this.$emit("queryData", this.formInline);
+    },
   }
+}
 
 </script>
 
 <style lang="scss">
-  .fromBiao {
-    position: relative;
-    margin-top:20px;
-
-    .demo-form-inline {
-      text-align: left;
-      // padding: 15px 20px 0;
-      padding: 15px 180px 0 20px;
-      background: #fafafa;
-      border: 1px solid #ddd;
-
-      .el-form-item {
-        width: auto;
-        margin-left: 15px;
-
-        .el-form-item__label {
-          // width: 92px;
-          color: #333;
-          width: 120px !important;
-        }
-
-        .el-input__inner {
-          color: #333;
-        }
-
-        .el-form-item__content {
-          // width: calc(100% - 92px) !important;
-          width: 185px;
-
-          .el-select,
-          .el-input,
-          .el-date-editor,
-          .el-cascader {
-            width: 100%;
-          }
-        }
-      }
-
-      .el-date-editor{
-        .el-range-input{
-          width: 58%;
-        }
-         .el-range__close-icon{
-           margin-right: -7px;
-         }
-      }
-      .itemBtn {
-        position: absolute;
-        top: 18px;
-        right: 20px;
-      }
-    }
+.demo-form-inline{
+  background: #fafafa;
+  border: 1px solid #ddd;
+  margin: 20px 0;
+  padding: 20px 20px 0;
+  box-sizing: border-box;
+  position: relative;
+  .el-form-item__label{
+    width: 120px;
   }
-  
+  .el-input{
+    width: 180px;
+  }
+  .itemBtn{
+    position: absolute;
+    top: 25px;
+    right: 30px;
+  }
+}
 </style>

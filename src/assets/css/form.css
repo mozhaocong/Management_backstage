@@ -1,29 +1,40 @@
-.font_L{
-  font-size: 28px;
-  line-height: 30px;
-  font-family: SourceHanSansSC-regular;
-  margin-bottom: 15px;
+.font_L {
+    font-size: 28px;
+    line-height: 30px;
+    font-family: SourceHanSansSC-regular;
+    margin-bottom: 15px;
 }
-.font_M{
-  font-size: 20px;
-  line-height: 22px;
-  font-family: SourceHanSansSC-regular;
-  margin-bottom: 15px;
+
+.font_M {
+    font-size: 20px;
+    line-height: 22px;
+    font-family: SourceHanSansSC-regular;
+    margin-bottom: 15px;
 }
+
 .font_S {
-  font-size: 14px;
-  line-height: 16px;
-  font-family: SourceHanSansSC-regular;
-  margin-bottom: 15px;
-}
-.font_t{
-  text-align: center;
+    font-size: 14px;
+    line-height: 16px;
+    font-family: SourceHanSansSC-regular;
+    margin-bottom: 15px;
 }
 
-.form_f_bs_c{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.font_t {
+    text-align: center;
 }
 
+.form_f_bs_c {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.form {
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 20px;
+    padding-top: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
