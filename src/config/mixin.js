@@ -62,15 +62,21 @@ export default {
         }
       })
     },
-    ObjForSetTableObj(data, Obj) {
-      if(Obj.key){
-        Obj.key.forEach(resB => {
-          for(let i in resB) {
-            if(i !== 'type' && Obj[i]) {
-              Obj[i] = data[resB[i]]
-            }
-          }
-        })
+    ObjForSetTableObj(setObj, Obj) {
+      let JSONData = JSON.parse(JSON.stringify(setObj))
+      setObj.tableKey.forEach(res => {
+        if(setObj[res.name] && Obj[res.name]) {
+          res.value = Obj[res.name]
+        }
+        delete JSONData[res.name]
+      })
+      delete JSONData.tableKey
+      for(let i in JSONData) {
+        let data = {
+          name: i,
+          value: Obj[i] || ''
+        }
+        setObj.tableKey.push(data)
       }
     },
     TableListForSetObj(tableArray,Array) {
@@ -90,19 +96,6 @@ export default {
       })
       return array
     },
-    // getNowFormatDate(data = '') {
-    //   let date = new Date(data);
-    //   let seperator1 = "-";
-    //   let seperator2 = ":";
-    //   let month = date.getMonth() + 1<10? "0"+(date.getMonth() + 1):date.getMonth() + 1;
-    //   let strDate = date.getDate()<10? "0" + date.getDate():date.getDate();
-    //   let currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-    //     + " " + this.setTimeTen(date.getHours()) + seperator2 + this.setTimeTen(date.getMinutes()) + seperator2 + this.setTimeTen(date.getSeconds())
-    //   return currentdate;
-    // },
-    // replaceTime(data) {
-    //   return data.replace(/-/g,"/")
-    // },
   },
   computed: {
     UserData() {

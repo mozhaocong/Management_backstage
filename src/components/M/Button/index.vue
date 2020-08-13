@@ -1,8 +1,8 @@
 <template>
-  <div class="button">
-    <el-button type="primary"  v-if="tpye === 'Disable'" Disable>禁用</el-button>
-    <el-button type="primary" icon="el-icon-edit"></el-button>
-    <el-button type="primary" icon="el-icon-delete"></el-button>
+  <div class="button"  @click="btn">
+    <el-button type="primary" v-if="type === 'disable'" >禁用</el-button>
+    <el-button type="primary" v-if="type === 'edit'" icon="el-icon-edit"></el-button>
+    <el-button type="primary" v-if="type === 'delete'" icon="el-icon-delete"></el-button>
   </div>
 </template>
 
@@ -11,7 +11,7 @@
     components: {
     },
     props: {
-      tpye: {
+      type: {
         type: String,
         default: 'disable'
       }
@@ -23,6 +23,9 @@
     created() {
     },
     methods: {
+      btn() {
+        this.$emit('buttonClick')
+      }
     },
     watch:{
     }

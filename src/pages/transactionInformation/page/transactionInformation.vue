@@ -1,6 +1,7 @@
 <template>
   <div class="content">
     <mTable ref="mTable" class="_table" :tableList="tableList"/>
+    <mPagination :total="total"  :currentPage='page' :pageSize="pageSize" @SizeChange="SizeChange" @CurrentChange="CurrentChange" />
     <div @click="basbas">transactionInformation</div>
   </div>
 </template>
@@ -9,15 +10,38 @@
   export default {
     data () {
       return {
-        tableList: []
+        tableList: [],
+        page: 1,
+        pageSize: 10,
+        total: 10
       }
     },
     created() {
       this.init()
     },
     methods: {
+      testdata(a, b) {
+        // b.row.dataG = 2
+
+        this.tableList[b.$index].tableKey.forEach(res => {
+          if(res.name ==='dataG') {
+            res.value = 2
+          }
+        })
+
+      },
+      SizeChange(data) {
+        this.page = 1
+        this.pageSize = data
+        this.init()
+      },
+      CurrentChange(data) {
+        console.log(data)
+        this.page = data
+        this.init()
+      },
       init() {
-        let objA = {
+        let setObj = {
           dataA: '产品编号',
           dataB: '产品名称',
           dataC: '原价格',
@@ -26,95 +50,53 @@
           dataF: '加入时间',
           dataG: '状态',
           dataH: '操作',
-          tableKye: [
-            {dataA: 'test', M_TableType: 'test'},
-            {dataH: [], M_TableType: 'button',  M_TableData: {}}
+          tableKey: [
+            {name:'dataA', value:'test'},
+            {name:'dataH', value:[], type: 'button'},
+            {name:'dataB', value:'', type: 'img'},
+            {name:'dataD', value:'', type: 'input'}
           ]
         }
-        let objAA = {
-          dataA: '产品编号',
-          dataB: '产品名称',
-          dataC: '原价格',
-          dataD: '现价',
-          dataE: '所属店铺',
-          dataF: '加入时间',
-          dataG: '状态',
-          dataH: '操作',
-          tableKye: [
-            {M_K_name:'dataA', value:'test', M_TableType: 'test'},
-            {M_K_name:'dataH', value:[], M_TableType: 'button',  M_TableData: {}}
-          ]
-        }
-        let data = {
-          dataA:'123',
-          dataB:'456',
-          dataC:'10$',
-          dataD:'3$',
-          dataE:'阿巴斯',
-          dataF:'1994',
-          dataG:'1',
-          data2:'1',
-          dataH: [
-            {name: 1},
-            {name: 2},
-            {name: 3}
-          ],
-        }
-  
-        let dataforA = function (setObj, obj) {
-          let JSONData = JSON.parse(JSON.stringify(setObj))
-          setObj.tableKye.forEach(res => {
-            if(setObj[res.M_K_name] && obj[res.M_K_name]) {
-              res.value = obj[res.M_K_name]
-              delete JSONData[res.M_K_name]
-            }
-          })
-          delete JSONData.tableKye
-          for(let i in JSONData) {
-            let data = {
-              M_K_name: i,
-              value: obj[i] || ''
-            }
-            setObj.tableKye.push(data)
-          }
-          console.log(setObj)
-        }
-        dataforA(objAA, data)
-        this.tableList.push(objAA)
-        return
-        
-        
-        let datafor = function (setObj, obj) {
-          if(!setObj.tableKye) {
-            setObj.tableKye = []
-          }
-          for (let i in obj){
-              setObjfor(i, obj, setObj)
-          }
-        }
-        let setObjfor = function (i, obj, setObj) {
-          let isPull = false
-          setObj.tableKye.forEach((res) => {
-            if(res[i]) {
-              res[i] = obj[i]
-              isPull = true
-            }
-          })
-          if(!isPull && setObj[i]) {
-            let data = {}
-            data[i] = obj[i]
-            setObj.tableKye.push(data)
-          }
-        }
-  
-        datafor(objA, data)
-        // console.log(objA)
-        this.tableList.push(objA)
+        let data = [
+          {
+            dataA:'123',
+            dataB:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597343174235&di=f2f3b77ea7ee7994bfac73063ccf2ba4&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2Ff703738da977391243bca26cfe198618367ae221.jpg',
+            dataC:'10$',
+            dataD:'3$',
+            dataE:'阿巴斯',
+            dataF:'1994',
+            dataG:'1',
+            dataH: [
+              {value: 'disable', method:(data) => {this.testdata('disable',data)}},
+              {value: 'edit'},
+              {value: 'delete'},
+            ],
+          },
+          {
+            dataA:'123',
+            dataC:'10$',
+            dataD:'3$',
+            dataE:'阿巴斯',
+            dataF:'1994',
+            dataG:'1',
+            dataH: [
+              {value: 'disable', method:(data) => {this.testdata('disable',data)}},
+              {value: 'edit'},
+              {value: 'delete'},
+            ],
+          },
+        ]
+        data.forEach(res => {
+          let setObjA = JSON.parse(JSON.stringify(setObj))
+          this.ObjForSetTableObj(setObjA, res)
+          this.tableList.push(setObjA)
+        })
+
       },
       basbas() {
-       console.log('tableData', this.$refs.mTable.tableData)
-        let ObjB = this.TableListForSetObj(this.$refs.mTable.tableData, this.tableList)
-        console.log('ObjB', ObjB)
+        console.log('tableData', this.$refs.mTable.tableData)
+        // let ObjB = this.TableListForSetObj(this.$refs.mTable.tableData, this.tableList)
+        // console.log('ObjB', ObjB)
       }
     },
   }
@@ -123,9 +105,10 @@
   ._table{
     width: 100%;
   }
-.content{
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
+  .content{
+    display: flex;
+    width: 800PX;
+    height: 100%;
+    flex-direction: column;
+  }
 </style>

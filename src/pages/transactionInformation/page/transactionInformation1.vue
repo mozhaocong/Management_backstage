@@ -37,7 +37,7 @@
             {'操作': 'dataH',type: "Button", typeData: {}},
             ]
         }
-        
+
         let objA = {
           dataA: '产品编号',
           dataB: '产品名称',
@@ -47,7 +47,7 @@
           dataF: '加入时间',
           dataG: '状态',
           dataH: '操作',
-          tableKye: [
+          tableKey: [
             {dataA: 'test', type: 'test'},
             {dataH: [], type: 'button'}
           ]

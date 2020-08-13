@@ -13,6 +13,7 @@ export default {
     Vue.component('mPopup', () => import('@/components/M/mPopup'))
     Vue.component('mUpload', () => import('@/components/M/mUpload'))
     Vue.component('mUploadFlie', () => import('@/components/M/mUploadFlie'))
+    Vue.component('mButton', () => import('@/components/M/Button/index'))
     Vue.prototype.$http = http
     Vue.prototype.goTo = function (obj) {
       if (obj.name === 'back') {
