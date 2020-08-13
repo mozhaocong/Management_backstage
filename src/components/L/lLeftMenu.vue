@@ -8,13 +8,13 @@
       v-for="(item,index) in leftMenu"
       :key="index"
     >
-      <el-submenu :index="index">
+      <el-submenu :index="index + ''">
         <template slot="title">
           <i class="el-icon-location"></i>
           <span>{{item.title}}</span>
         </template>
         <el-menu-item-group v-for="(items,indexs) in item.children" :key="indexs">
-          <el-menu-item :index="indexs" @click="toPage(items)">{{items.name}}</el-menu-item>
+          <el-menu-item :index="indexs + ''" @click="toPage(items)">{{items.name}}</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>

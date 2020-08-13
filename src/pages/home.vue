@@ -41,6 +41,7 @@ export default {
 .content {
   width: 100%;
   height: calc(100% - 55px);
+  background-color: #f5f5f5;
   position: relative;
   display: flex;
   .leftMenu {
@@ -50,6 +51,8 @@ export default {
   .routerView {
     height: 100%;
     width: calc(100% - 240px);
+    padding: 30px;
+    box-sizing: border-box;
   }
 }
 </style>
