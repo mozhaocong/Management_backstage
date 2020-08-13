@@ -66,7 +66,6 @@ export default {
       if(Obj.key){
         Obj.key.forEach(resB => {
           for(let i in resB) {
-            console.log('data[resB[i]]', data[resB[i]], resB[i])
             if(i !== 'type' && Obj[i]) {
               Obj[i] = data[resB[i]]
             }

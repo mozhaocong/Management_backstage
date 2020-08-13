@@ -17,27 +17,34 @@
     },
     methods: {
       init() {
-        let obj =  {
-          '产品编号': 'tableList-1',
-          '产品名称': '517 Min',
-          '原价格': '原价格' ,
-          '现价': '原价格' ,
-          '所属店铺': '原价格' ,
-          '加入时间': '原价格' ,
-          '状态': '原价格' ,
-          '操作': '原价格' ,
-          key:[
-            {'产品编号': 'dataA',},
-            {'产品名称': 'dataB',type: "div"},
-            {'原价格': 'dataC',type: "div"},
-            {'现价': 'dataD',type: "div"},
-            {'所属店铺': 'dataE',type: "div"},
-            {'加入时间': 'dataF',type: "div"},
-            {'状态': 'dataG',type: "div"},
-            {'操作': 'dataH',type: "div", typeData: {}},
-            ]
+        let objA = {
+          dataA: '产品编号',
+          dataB: '产品名称',
+          dataC: '原价格',
+          dataD: '现价',
+          dataE: '所属店铺',
+          dataF: '加入时间',
+          dataG: '状态',
+          dataH: '操作',
+          tableKye: [
+            {dataA: 'test', M_TableType: 'test'},
+            {dataH: [], M_TableType: 'button',  M_TableData: {}}
+          ]
         }
-
+        let objAA = {
+          dataA: '产品编号',
+          dataB: '产品名称',
+          dataC: '原价格',
+          dataD: '现价',
+          dataE: '所属店铺',
+          dataF: '加入时间',
+          dataG: '状态',
+          dataH: '操作',
+          tableKye: [
+            {M_K_name:'dataA', value:'test', M_TableType: 'test'},
+            {M_K_name:'dataH', value:[], M_TableType: 'button',  M_TableData: {}}
+          ]
+        }
         let data = {
           dataA:'123',
           dataB:'456',
@@ -46,13 +53,63 @@
           dataE:'阿巴斯',
           dataF:'1994',
           dataG:'1',
-          dataH:'1',
+          data2:'1',
+          dataH: [
+            {name: 1},
+            {name: 2},
+            {name: 3}
+          ],
         }
-        this.ObjForSetTableObj(data, obj)
-        console.log(obj)
-        let img = 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2534506313,1688529724&fm=26&gp=0.jpg'
-        this.tableList.push(obj, obj, obj)
-        // this.ObjForSetTableList(data,  this.tableList)
+  
+        let dataforA = function (setObj, obj) {
+          let JSONData = JSON.parse(JSON.stringify(setObj))
+          setObj.tableKye.forEach(res => {
+            if(setObj[res.M_K_name] && obj[res.M_K_name]) {
+              res.value = obj[res.M_K_name]
+              delete JSONData[res.M_K_name]
+            }
+          })
+          delete JSONData.tableKye
+          for(let i in JSONData) {
+            let data = {
+              M_K_name: i,
+              value: obj[i] || ''
+            }
+            setObj.tableKye.push(data)
+          }
+          console.log(setObj)
+        }
+        dataforA(objAA, data)
+        this.tableList.push(objAA)
+        return
+        
+        
+        let datafor = function (setObj, obj) {
+          if(!setObj.tableKye) {
+            setObj.tableKye = []
+          }
+          for (let i in obj){
+              setObjfor(i, obj, setObj)
+          }
+        }
+        let setObjfor = function (i, obj, setObj) {
+          let isPull = false
+          setObj.tableKye.forEach((res) => {
+            if(res[i]) {
+              res[i] = obj[i]
+              isPull = true
+            }
+          })
+          if(!isPull && setObj[i]) {
+            let data = {}
+            data[i] = obj[i]
+            setObj.tableKye.push(data)
+          }
+        }
+  
+        datafor(objA, data)
+        // console.log(objA)
+        this.tableList.push(objA)
       },
       basbas() {
        console.log('tableData', this.$refs.mTable.tableData)

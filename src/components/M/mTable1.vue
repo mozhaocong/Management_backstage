@@ -8,6 +8,7 @@
     >
       <el-table-column
         :key="index"
+        :prop="item.value"
         :label="item.name"
         v-for="(item, index) in itemList"
       >
@@ -46,22 +47,9 @@ export default {
       }
       let data = this.tableList;
       let dataA = JSON.parse(JSON.stringify(data));
-      let dataB = {}
-      let dataC = []
-      dataA[0].tableKye.forEach(res => {
-        dataB[res.M_K_name] = {
-          ...res
-        }
-      })
-      // dataA.forEach((res) => {
-      //   delete res.tableKye;
-      // });
-      for(let i in data) {
-        if(i !== 'tableKye') {}
-        
-      }
-      console.log(dataB)
-      return;
+      dataA.forEach((res) => {
+        delete res.key;
+      });
       let itemList = [];
       let keyData = [];
       if (data[0].key) {
@@ -93,6 +81,8 @@ export default {
       }
       this.itemList = itemList;
       this.tableData = dataA;
+      console.log('itemList', this.itemList)
+      console.log('tableData', this.tableData)
     },
     objectSpanMethod({ row, column, rowIndex, columnIndex }) {
       return false;
