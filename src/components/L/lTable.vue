@@ -1,19 +1,14 @@
 <template>
   <div class="tableFrom">
-    <el-table ref="table" :data="tableData" stripe tooltip-effect="dark" border style="width: 100%" height="460"
-      :header-cell-style="{background:'#f1f4f8',color:'#606266'}" v-table-height-adaptive="{table:$refs.table}"
+    <el-table ref="table" :data="tableData" stripe tooltip-effect="dark" border style="width: 100%" height="520"
+      :header-cell-style="{background:'#f1f4f8',color:'#606266'}"
       @selection-change="handleSelectionChange" @sort-change="changeTableSort">
       <template v-for="(th, index) in tableHeader">
         <el-table-column :type="th.type" :prop="th.prop" :sortable="th.sortable" :show-overflow-tooltip="true"
-          :width="th.width" :label="th.label" :key="index" v-if="th.prop!='image' && th.label!='ids'">
-          <!-- <template slot="header">
-            <div class="table-head">
-              {{th.label}}
-            </div>
-          </template> -->
+          :width="th.width" :label="th.label" :key="index" v-if="th.prop!='image'">
         </el-table-column>
 
-        <el-table-column v-else-if="th.prop =='image' && th.label!='ids'" width="80" :label="th.label" :key="index"
+        <!-- <el-table-column v-else-if="th.prop =='image'" width="80" :label="th.label" :key="index"
           :resizable="false">
           <template slot-scope="scope">
             <el-popover placement="right-end" width="200" trigger="hover">
@@ -21,13 +16,13 @@
               <img slot="reference" :src="scope.row.image" height="50" width="50" />
             </el-popover>
           </template>
-        </el-table-column>
+        </el-table-column> -->
       </template>
       <el-table-column label="操作" fixed="right" :width="tables.operateWidth" v-if="tables!=null&&tables.operate"
         align="center" :resizable="false">
         <template slot-scope="scope">
           <el-button size="mini" v-for="(item,index) in tables.events" :key="index"
-            @click="btnEvent(item.action,scope.row)" :type="item.type" plain>
+            @click="btnEvent(item.action,scope.row)" plain>
             {{item.label}}
           </el-button>
         </template>
@@ -45,7 +40,7 @@
     ],
     data() {
       return {
-
+        
       }
     },
     mounted() {},
@@ -59,11 +54,9 @@
         });
         this.$emit('choice', selectionArr);
       },
-
       changeTableSort(val){
         this.$emit('changeTableSort', val);
       },
-
       btnEvent(action, row) {
         this.$emit(action, row);
       },

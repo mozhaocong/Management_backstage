@@ -85,4 +85,7 @@ export default {
     right: 30px;
   }
 }
+.el-form--inline .el-form-item{
+  margin-right: 40px;
+}
 </style>
