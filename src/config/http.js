@@ -1,9 +1,11 @@
 import axios from 'axios'
-
-let origin = 'http://report.gdkeyong.com/service'
+import constant from './constant'
+let origin = constant.origin
 axios.defaults.baseURL = origin
 let headers = {
-  'Content-Type': 'application/json'
+  // 'Content-Type': 'application/json',
+  'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+  'token' : 'TOKEN_4b8e64abc1224d8cb5cf4ca8514fb8e3' // 正式要删除的
 }
 const http = axios.create({
   headers
@@ -20,10 +22,6 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
   res => {
-    // if(res.data.code === 1004) {
-    //   window.appVue.routeLogin(false)
-    //   return res
-    // }
     let data = ['getPage', 'getList', 'getById']
     let message = true
     data.forEach(item => {
@@ -37,12 +35,9 @@ http.interceptors.response.use(
         type: 'success'
       });
     }
-    // console.log(window.appVue)
-    // console.log(res.data.code)
     return res
   },
   err => {
-    // console.log('结束res', err)
     window.h5vue.$message.error(`接口请求：${err}`);
     return Promise.reject(err)
   }

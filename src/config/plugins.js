@@ -1,5 +1,6 @@
 import http from './http'
 import mixin from "./mixin";
+import constant from './constant'
 export default {
   install(Vue) {
     Vue.component('mEchart', () => import('@/components/M/mEchart'))
@@ -15,6 +16,7 @@ export default {
     Vue.component('mUploadFlie', () => import('@/components/M/mUploadFlie'))
     Vue.component('mButton', () => import('@/components/M/Button/index'))
     Vue.prototype.$http = http
+    Vue.prototype.$origin = constant.origin
     Vue.prototype.goTo = function (obj) {
       if (obj.name === 'back') {
         this.$router.go(obj.count || -1)

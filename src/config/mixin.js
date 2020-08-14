@@ -1,10 +1,10 @@
-import Test from '../assets/api/Test'
+import transactionInformation from '../pages/transactionInformation/api'
 
 export default {
   data() {
     return {
       mAPI:{
-        Test, // 接口文档
+        transactionInformation, // 接口文档
       }
     }
   },

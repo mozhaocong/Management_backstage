@@ -13,22 +13,56 @@
         tableList: [],
         page: 1,
         pageSize: 10,
-        total: 10
+        total: 10,
+        setObj: {}
       }
     },
     created() {
       this.init()
+      this.initGetPage()
     },
     methods: {
+      initGetPage() {
+        let data = {
+          userCode: '13226150',
+          orderNo: '',
+          shopCode: '',
+          status: '',
+          pageSize: '10',
+          page: '1',
+          startTime: '',
+          endTime: ''
+        }
+        this.mAPI.transactionInformation.getPage(data).then(({data}) => {
+          let records = data.data.records
+          this.setTableList(records)
+        })
+      },
+      setTableList (records) {
+        this.tableList = []
+        records.forEach(res => {
+          res.goodsImg = res.orderDetailList[0].goodsImg
+          res.receiver = res.orderAddress.receiver
+          res.dataH = [
+            {value: 'disable', method:(data) => {this.testdata('disable',data)}},
+            {value: 'edit'},
+            {value: 'delete'},
+          ]
+          let setObjA = JSON.parse(JSON.stringify(this.setObj))
+          this.ObjForSetTableObj(setObjA, res)
+          this.tableList.push(setObjA)
+        })
+        
+      },
       testdata(a, b) {
         // b.row.dataG = 2
-
+        
         this.tableList[b.$index].tableKey.forEach(res => {
           if(res.name ==='dataG') {
             res.value = 2
           }
         })
-
+        
       },
       SizeChange(data) {
         this.page = 1
@@ -41,57 +75,42 @@
         this.init()
       },
       init() {
-        let setObj = {
-          dataA: '产品编号',
-          dataB: '产品名称',
-          dataC: '原价格',
-          dataD: '现价',
+        this.setObj = {
+          orderNo: '产品编号',
+          shopName: '产品名称',
+          goodsImg: '产品图',
+          payPrice: '原价格',
+          price: '现价',
           dataE: '所属店铺',
-          dataF: '加入时间',
-          dataG: '状态',
+          createTime: '加入时间',
+          receiver: '用户名',
           dataH: '操作',
           tableKey: [
-            {name:'dataA', value:'test'},
             {name:'dataH', value:[], type: 'button'},
-            {name:'dataB', value:'', type: 'img'},
-            {name:'dataD', value:'', type: 'input'}
+            {name:'goodsImg', value:'', type: 'img'},
           ]
         }
-        let data = [
-          {
-            dataA:'123',
-            dataB:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597343174235&di=f2f3b77ea7ee7994bfac73063ccf2ba4&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2Ff703738da977391243bca26cfe198618367ae221.jpg',
-            dataC:'10$',
-            dataD:'3$',
-            dataE:'阿巴斯',
-            dataF:'1994',
-            dataG:'1',
-            dataH: [
-              {value: 'disable', method:(data) => {this.testdata('disable',data)}},
-              {value: 'edit'},
-              {value: 'delete'},
-            ],
-          },
-          {
-            dataA:'123',
-            dataC:'10$',
-            dataD:'3$',
-            dataE:'阿巴斯',
-            dataF:'1994',
-            dataG:'1',
-            dataH: [
-              {value: 'disable', method:(data) => {this.testdata('disable',data)}},
-              {value: 'edit'},
-              {value: 'delete'},
-            ],
-          },
-        ]
-        data.forEach(res => {
-          let setObjA = JSON.parse(JSON.stringify(setObj))
-          this.ObjForSetTableObj(setObjA, res)
-          this.tableList.push(setObjA)
-        })
-
+        // let data = [
+        //   {
+        //     dataA:'123',
+        //     dataC:'10$',
+        //     dataD:'3$',
+        //     dataE:'阿巴斯',
+        //     dataF:'1994',
+        //     dataG:'1',
+        //     dataH: [
+        //       {value: 'disable', method:(data) => {this.testdata('disable',data)}},
+        //       {value: 'edit'},
+        //       {value: 'delete'},
+        //     ],
+        //   },
+        // ]
+        // data.forEach(res => {
+        //   let setObjA = JSON.parse(JSON.stringify(setObj))
+        //   this.ObjForSetTableObj(setObjA, res)
+        //   this.tableList.push(setObjA)
+        // })
+        
       },
       basbas() {
         console.log('tableData', this.$refs.mTable.tableData)
