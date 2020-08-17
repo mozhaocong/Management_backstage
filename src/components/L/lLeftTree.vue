@@ -1,26 +1,29 @@
 <template>
   <div class="leftTree">
-    <el-tree :data="data" :props="defaultProps" accordion @node-click="handleNodeClick"></el-tree>
+    <el-tree v-if="treeData" :data="treeData" :props="defaultProps" accordion @node-click="handleNodeClick"></el-tree>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["treeData"],
+  props: ["treeData", "defaultProps"],
   data() {
     return {
-      data: [{ label: "商品分类列表", children: [{ label: "蔬菜水果", children: [{ label: "蔬菜"}, { label: "水果"}]}]},
-             { label: "商品分类列表1", children: [{ label: "蔬菜水果1", children: [{ label: "蔬菜1"}, { label: "水果1"}]}]}],
-      defaultProps: {
-        children: "children",
-        label: "label",
-      },
+      // data: [{ label: "商品分类列表", children: [{ label: "蔬菜水果", children: [{ label: "蔬菜"}, { label: "水果"}]}]},
+      //        { label: "商品分类列表1", children: [{ label: "蔬菜水果1", children: [{ label: "蔬菜1"}, { label: "水果1"}]}]}],
+      // defaultProps: {
+      //   children: "children",
+      //   label: "label",
+      // },
     };
   },
-  mounted() {},
+  created() {
+  },
+  mounted() {
+  },
   methods: {
     handleNodeClick(val) {
-      console.log(val);
+      this.$emit("leftTreePick", val);
     },
   },
 };

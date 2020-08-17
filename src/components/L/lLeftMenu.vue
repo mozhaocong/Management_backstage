@@ -27,9 +27,11 @@ export default {
       leftMenu: [
         { title: "产品管理", children: [{ name: "产品类表", path: "product"}, { name: "分类管理", path: "classification"}]},
         { title: "图片管理", children: [{ name: "广告管理", path: "advertisement"}]},
-        { title: "交易管理", children: [{ name: "交易信息", path: "transactionInformation"}, { name: "交易订单", path: "tradingOrder"}, { name: "订单管理", path: "orderManagement"}, 
-                                       { name: "交易金额", path: "transactionAmount"}, { name: "订单处理", path: "orderProcessing"}, { name: "退款管理", path: "refundManagement"}]},
-        { title: "会员管理", children: [{ name: "会员列表", path: "membershipList"}]},
+        { title: "交易管理", children: [
+          // { name: "交易信息", path: "transactionInformation"}
+        // , { name: "交易订单", path: "tradingOrder"} ,
+         { name: "订单管理", path: "orderManagement"}]},
+        // { title: "会员管理", children: [{ name: "会员列表", path: "membershipList"}]},
         { title: "店铺管理", children: [{ name: "店铺列表", path: "shopList"}]},
       ],
     };
@@ -55,4 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+>>> .el-menu-item-group__title {
+  display: none !important;
+}
 </style>

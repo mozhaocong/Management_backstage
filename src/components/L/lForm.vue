@@ -48,12 +48,10 @@ export default {
   methods: {
     onSubmit() {
       alert("查询");
-      return;
       this.$emit("queryData", this.formInline);
     },
     reset() {
       alert("重置");
-      return;
       let that = this;
       Object.keys(this.formInline).forEach(key => {
         that.formInline[key] = "";

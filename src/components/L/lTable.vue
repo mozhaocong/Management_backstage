@@ -2,21 +2,21 @@
   <div class="tableFrom">
     <el-table ref="table" :data="tableData" stripe tooltip-effect="dark" border style="width: 100%" height="520"
       :header-cell-style="{background:'#f1f4f8',color:'#606266'}"
-      @selection-change="handleSelectionChange" @sort-change="changeTableSort">
+      @selection-change="handleSelectionChange" @sort-change="changeTableSort" @select="select">
       <template v-for="(th, index) in tableHeader">
         <el-table-column :type="th.type" :prop="th.prop" :sortable="th.sortable" :show-overflow-tooltip="true"
-          :width="th.width" :label="th.label" :key="index" v-if="th.prop!='image'">
+          :width="th.width" :label="th.label" :key="index" v-if="th.prop!='imgUrl'">
         </el-table-column>
 
-        <!-- <el-table-column v-else-if="th.prop =='image'" width="80" :label="th.label" :key="index"
+        <el-table-column v-else-if="th.prop =='imgUrl'" width="80" :label="th.label" :key="index"
           :resizable="false">
           <template slot-scope="scope">
             <el-popover placement="right-end" width="200" trigger="hover">
-              <img :src="scope.row.image" alt="" width="200" height="200">
-              <img slot="reference" :src="scope.row.image" height="50" width="50" />
+              <img :src="'http://shopkeeper.gdkeyong.com/file' + scope.row.imgUrl" alt="" width="200" height="200">
+              <img slot="reference" :src="'http://shopkeeper.gdkeyong.com/file' + scope.row.imgUrl" height="50" width="50" />
             </el-popover>
           </template>
-        </el-table-column> -->
+        </el-table-column>
       </template>
       <el-table-column label="操作" fixed="right" :width="tables.operateWidth" v-if="tables!=null&&tables.operate"
         align="center" :resizable="false">
@@ -40,7 +40,7 @@
     ],
     data() {
       return {
-        
+        selectData: []
       }
     },
     mounted() {},
@@ -60,6 +60,12 @@
       btnEvent(action, row) {
         this.$emit(action, row);
       },
+      select(val) {
+        this.selectData = val;
+      },
+      getSelectData() {
+        return this.selectData;
+      }
     }
   }
 
@@ -115,4 +121,11 @@
       transform: scale(1);
     }
   }
+
+.el-table .cell.el-tooltip{
+  white-space: normal;
+}
+.el-table-column--selection .cell {
+  text-align: center;
+}
 </style>

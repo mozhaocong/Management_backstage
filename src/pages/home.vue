@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <MTitle />
-    <div class="content">
+    <div class="container">
       <leftMenu class="leftMenu" />
       <!-- <MSidebar class=" left_item"/> -->
       <div class="routerView">
@@ -38,7 +38,7 @@ export default {
     width: 150px;
   }
 }
-.content {
+.container {
   width: 100%;
   height: calc(100% - 55px);
   background-color: #f5f5f5;
