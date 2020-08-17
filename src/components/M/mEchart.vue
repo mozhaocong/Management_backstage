@@ -22,43 +22,65 @@
     methods: {
       setoptions() {
         this.options = {
-          // title: {
-          //   text: '某站点用户访问来源',
-          //   subtext: '纯属虚构',
-          //   left: 'center'
-          // },
-          tooltip: {
-            trigger: 'item',
-            formatter: '{a} <br/>{b} : {c} ({d}%)'
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '10%',
+            containLabel: true
           },
           legend: {
-            orient: 'vertical',
-            left: 'left',
-            data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+            data: ['所有订单', '待付款', '已付款', '待发货'],
+            bottom: "0"
+          },
+          xAxis: {
+            type: 'category',
+            data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+          },
+          yAxis: {
+            type: 'value'
           },
           series: [
             {
-              name: '数据统计',
-              type: 'pie',
-              radius: '55%',
-              center: ['50%', '60%'],
-              data: [
-                {value: 335, name: '直接访问'},
-                {value: 310, name: '邮件营销'},
-                {value: 234, name: '联盟广告'},
-                {value: 135, name: '视频广告'},
-                {value: 1548, name: '搜索引擎'}
-              ],
-              emphasis: {
-                itemStyle: {
-                  shadowBlur: 10,
-                  shadowOffsetX: 0,
-                  shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-              }
+              data: [250, 250, 400, 250, 400, 965, 1100, 600, 1450, 250, 400, 400],
+              type: 'bar',
+              itemStyle: {
+                color: "#2EC7C9",
+                barBorderRadius: [10, 10, 0, 0],
+              },
+              name: '所有订单'
+
+            },
+            {
+              data: [200, 200, 350, 200, 350, 910, 1000, 500, 1350, 200, 100, 100],
+              type: 'bar',
+              itemStyle: {
+                color: "#B6A2DE",
+                barBorderRadius: [10, 10, 0, 0],
+
+              },
+              name: '待付款'
+            },
+            {
+              data: [150, 190, 340, 190, 330, 1000, 940, 550, 1400, 244, 150, 200],
+              type: 'bar',
+              itemStyle: {
+                color: "#5AB1EF",
+                barBorderRadius: [10, 10, 0, 0],
+              },
+              name: '已付款'
+            },
+            {
+              data: [200, 200, 350, 200, 350, 910, 1000, 500, 1350, 200, 100, 100],
+              type: 'bar',
+              itemStyle: {
+                color: "#FDB880",
+                barBorderRadius: [10, 10, 0, 0],
+              },
+              name: '待发货'
             }
+
           ]
-        }
+        };
       }
     },
     watch:{

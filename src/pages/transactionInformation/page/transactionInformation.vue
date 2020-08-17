@@ -1,8 +1,17 @@
 <template>
   <div class="content">
-    <mTable ref="mTable" class="_table" :tableList="tableList"/>
-    <mPagination :total="total"  :currentPage='page' :pageSize="pageSize" @SizeChange="SizeChange" @CurrentChange="CurrentChange" />
-    <div @click="basbas">transactionInformation</div>
+    <div class="title">首页/ 交易信息</div>
+    <div class="itemA" >
+      <div class="dataList" v-for="(item, index) in dataList" :key="index">
+        <div :style="{background:item.color}" class="blockA"></div>
+        <div class="blockB">
+          <div class="price">{{item.price}}</div>
+          <div>{{item.name}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="echart_title">月购买订单交易记录</div>
+    <m-echart />
   </div>
 </template>
 
@@ -10,112 +19,22 @@
   export default {
     data () {
       return {
-        tableList: [],
-        page: 1,
-        pageSize: 10,
-        total: 10,
-        setObj: {}
+        dataList: []
       }
     },
     created() {
-      this.init()
-      this.initGetPage()
+      this.setDataList()
     },
     methods: {
-      initGetPage() {
-        let data = {
-          userCode: '13226150',
-          orderNo: '',
-          shopCode: '',
-          status: '',
-          pageSize: '10',
-          page: '1',
-          startTime: '',
-          endTime: ''
-        }
-        this.mAPI.transactionInformation.getPage(data).then(({data}) => {
-          let records = data.data.records
-          this.setTableList(records)
-        })
-      },
-      setTableList (records) {
-        this.tableList = []
-        records.forEach(res => {
-          res.goodsImg = res.orderDetailList[0].goodsImg
-          res.receiver = res.orderAddress.receiver
-          res.dataH = [
-            {value: 'disable', method:(data) => {this.testdata('disable',data)}},
-            {value: 'edit'},
-            {value: 'delete'},
-          ]
-          let setObjA = JSON.parse(JSON.stringify(this.setObj))
-          this.ObjForSetTableObj(setObjA, res)
-          this.tableList.push(setObjA)
-        })
-        
-      },
-      testdata(a, b) {
-        // b.row.dataG = 2
-        
-        this.tableList[b.$index].tableKey.forEach(res => {
-          if(res.name ==='dataG') {
-            res.value = 2
-          }
-        })
-        
-      },
-      SizeChange(data) {
-        this.page = 1
-        this.pageSize = data
-        this.init()
-      },
-      CurrentChange(data) {
-        console.log(data)
-        this.page = data
-        this.init()
-      },
-      init() {
-        this.setObj = {
-          orderNo: '产品编号',
-          shopName: '产品名称',
-          goodsImg: '产品图',
-          payPrice: '原价格',
-          price: '现价',
-          dataE: '所属店铺',
-          createTime: '加入时间',
-          receiver: '用户名',
-          dataH: '操作',
-          tableKey: [
-            {name:'dataH', value:[], type: 'button'},
-            {name:'goodsImg', value:'', type: 'img'},
-          ]
-        }
-        // let data = [
-        //   {
-        //     dataA:'123',
-        //     dataC:'10$',
-        //     dataD:'3$',
-        //     dataE:'阿巴斯',
-        //     dataF:'1994',
-        //     dataG:'1',
-        //     dataH: [
-        //       {value: 'disable', method:(data) => {this.testdata('disable',data)}},
-        //       {value: 'edit'},
-        //       {value: 'delete'},
-        //     ],
-        //   },
-        // ]
-        // data.forEach(res => {
-        //   let setObjA = JSON.parse(JSON.stringify(setObj))
-        //   this.ObjForSetTableObj(setObjA, res)
-        //   this.tableList.push(setObjA)
-        // })
-        
-      },
-      basbas() {
-        console.log('tableData', this.$refs.mTable.tableData)
-        // let ObjB = this.TableListForSetObj(this.$refs.mTable.tableData, this.tableList)
-        // console.log('ObjB', ObjB)
+      setDataList() {
+        let data = [
+          {name:'交易金额', price: '34522.36', color: '#FD4D4F'},
+          {name:'交易金额', price: '5656', color: '#1890FF'},
+          {name:'交易金额', price: '34565', color: '#36CFCA'},
+          {name:'交易金额', price: '34', color: '#FFA940'},
+          {name:'交易金额', price: '3441.68', color: '#87B87F'}
+        ]
+        this.dataList = data
       }
     },
   }
@@ -126,8 +45,46 @@
   }
   .content{
     display: flex;
-    width: 800PX;
+    width: 100%;
+    min-width: 118px;
     height: 100%;
     flex-direction: column;
+  }
+  .itemA{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    font-size: 12px;
+    .dataList{
+      display: flex;
+    }
+    .blockA{
+      width: 83px;
+      height: 76px;
+    }
+    .blockB{
+      width: 122px;
+      height: 74px;
+      border: 1px solid rgba(187, 187, 187, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      .price{
+        font-size: 20px;
+      }
+    }
+  }
+  .echart_title{
+    font-size: 20px;
+    margin: 20px 0 0px;
+    width:100%;
+    text-align: center;
+  }
+  .title {
+    /*margin-bottom: 10px;*/
+    margin: 10px 10px 10px;
+    font-size: 14px;
   }
 </style>

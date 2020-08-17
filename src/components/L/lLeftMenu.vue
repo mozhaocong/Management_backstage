@@ -5,16 +5,17 @@
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
-      v-for="(item,index) in leftMenu"
-      :key="index"
     >
-      <el-submenu :index="index + ''">
+      <el-submenu :index="index + 'A'"
+                  v-for="(item,index) in leftMenu"
+                  :key="index"
+      >
         <template slot="title">
           <i class="el-icon-location"></i>
           <span>{{item.title}}</span>
         </template>
         <el-menu-item-group v-for="(items,indexs) in item.children" :key="indexs">
-          <el-menu-item :index="indexs + ''" @click="toPage(items)">{{items.name}}</el-menu-item>
+          <el-menu-item :index="index + '-' + indexs + 'B'" @click="toPage(items)">{{items.name}}</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
@@ -25,10 +26,10 @@ export default {
   data() {
     return {
       leftMenu: [
+        { title: "系统管理", children: [{ name: "首页", path: "systemIndex"}]},
         { title: "产品管理", children: [{ name: "产品类表", path: "product"}, { name: "分类管理", path: "classification"}]},
         { title: "图片管理", children: [{ name: "广告管理", path: "advertisement"}]},
-        { title: "交易管理", children: [
-          // { name: "交易信息", path: "transactionInformation"}
+        { title: "交易管理", children: [{ name: "交易信息", path: "transactionInformation"},
         // , { name: "交易订单", path: "tradingOrder"} ,
          { name: "订单管理", path: "orderManagement"}]},
         // { title: "会员管理", children: [{ name: "会员列表", path: "membershipList"}]},

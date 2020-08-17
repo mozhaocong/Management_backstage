@@ -52,17 +52,17 @@
           this.ObjForSetTableObj(setObjA, res)
           this.tableList.push(setObjA)
         })
-        
+
       },
       testdata(a, b) {
         // b.row.dataG = 2
-        
+
         this.tableList[b.$index].tableKey.forEach(res => {
           if(res.name ==='dataG') {
             res.value = 2
           }
         })
-        
+
       },
       SizeChange(data) {
         this.page = 1
@@ -110,7 +110,6 @@
         //   this.ObjForSetTableObj(setObjA, res)
         //   this.tableList.push(setObjA)
         // })
-        
       },
       basbas() {
         console.log('tableData', this.$refs.mTable.tableData)
